@@ -1,6 +1,3 @@
-// const apiKey = "AIzaSyDfqmASd9-0ufPs8tD_paLRGs93Iuv1N7U";
-// const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/3213900/posts/search?q=documentation&key=${apiKey}`;
-
 const apiKey = "AIzaSyDfqmASd9-0ufPs8tD_paLRGs93Iuv1N7U";
 const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/3213900/posts/search?q=documentation&key=${apiKey}`;
 
