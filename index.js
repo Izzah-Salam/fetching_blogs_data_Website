@@ -4,45 +4,53 @@
 const apiKey = "AIzaSyDfqmASd9-0ufPs8tD_paLRGs93Iuv1N7U";
 const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/3213900/posts/search?q=documentation&key=${apiKey}`;
 
-window.addEventListener("load", () => {
+function hideLoader() {
 	const loader = document.querySelector(".loader");
 	loader.classList.add("loader-hidden");
-	LoadBlogs();
-	loader.addEventListener("transitionend", () => {
-		document.body.removeChild(loader);
-	});
-});
+}
 
-async function LoadBlogs() {
-	try {
-		const response = await fetch(apiUrl);
-		if (!response.ok) {
-			throw new Error(`HTTP ERROR STATUS: ${response.status}`);
-		}
-		const Alldata = await response.json();
-		console.log(Alldata);
-		let dataStore = "";
-		for (let item of Alldata.items) {
-			dataStore += `
-        <div class="blogs">
-          <div class="img">
-		<img src=" ${item.author.image.url}" />
-           
-          </div>
-          <div class="blogs-des">
-            <h2>Title : ${item.title}</h2>
-            <h3>Author: ${item.author.displayName}</h3>
-            <p>
-              ${item.content}
-            </p>
-          </div>
-        </div>`;
-			console.log(`Img url print ${item.author.image.url}`);
-		}
+async function getDataFromDatabase() {
+	const response = await fetch(apiUrl);
 
-		const blogContainer = document.querySelector(".blog-container");
-		blogContainer.innerHTML = dataStore;
-	} catch (error) {
-		console.log("Error Fetching data", error);
+	if (!response.ok) {
+		hideLoader();
+		throw new Error(`HTTP ERROR STATUS: ${response.status}`);
+	}
+
+	hideLoader();
+	const allData = await response.json();
+
+	// we have to complete this function
+	showDataOnUI(allData);
+}
+
+function showDataOnUI(data) {
+	const blogContainer = document.querySelector(".blog-container");
+
+	for (const item of data.items) {
+		const html = `
+			<div class="blogs">
+					<div class="img">
+						<img src="${item.author.image.url}" />
+					</div>
+					<div class="blogs-des">
+						<h2>${item.title}</h2>
+						<h3>${item.author.displayName}</h3>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem,
+							animi!
+						</p>
+					</div>
+				</div>
+		`;
+
+		blogContainer.insertAdjacentHTML("beforeend", html);
 	}
 }
+
+window.addEventListener("load", () => {
+	//loader will be initally running so we don't have to do anything
+	// we just have to call getDataFromDatabase
+
+	getDataFromDatabase();
+});
