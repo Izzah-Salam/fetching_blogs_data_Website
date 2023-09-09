@@ -1,0 +1,83 @@
+*,
+*::after,
+*::before {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #cbc6c6;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: opacity 0.75s, visibility 0.75s;
+}
+
+.loader::after {
+	content: "";
+	width: 75px;
+	height: 75px;
+	border: 10px solid black;
+	border-top-color: #eee;
+	border-radius: 50%;
+	animation: loading 0.75s ease infinite;
+}
+
+.blog-container {
+	padding: 3rem;
+}
+
+.logo {
+	text-align: center;
+	font-size: 5rem;
+	font-family: "Imperial Script", cursive;
+	margin: 1rem;
+}
+
+.blog-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+}
+
+.blogs {
+	max-width: 400px;
+	border-radius: 20px;
+	overflow: hidden;
+	border: 2px solid black;
+}
+
+.img img {
+	width: 100%;
+}
+
+.blogs-des {
+	padding: 1rem;
+}
+.blogs-des * {
+	margin-top: 10px;
+}
+
+.blogs-des h2 {
+	font-size: 2rem;
+}
+
+.loader-hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+@keyframes loading {
+	from {
+		transform: rotate(0turn);
+	}
+	to {
+		transform: rotate(1turn);
+	}
+}
